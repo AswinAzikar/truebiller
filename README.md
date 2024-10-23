@@ -4,9 +4,8 @@ A simple Billing application, simply using local storage
 
 ## Getting Started
 
-
-
-https://github.com/AswinAzikar/truebiller/blob/main/screenshots/screenshot1.png
+screenshots
+![image](https://github.com/user-attachments/assets/dfe9e03a-891e-42d7-bf9f-9d3b9fcf298e)
 
 This project is a starting point for a Flutter application.
 
