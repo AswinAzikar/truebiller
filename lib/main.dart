@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           },
         );
       },
-      initialRoute: isLoggedIn ? AppRoutes.home : AppRoutes.landingScreen,
+      initialRoute: isLoggedIn ? AppRoutes.navigation : AppRoutes.landingScreen,
       onGenerateRoute: (RouteSettings settings) {
         final WidgetBuilder? builder = AppRoutes.routes[settings.name];
         if (builder != null) {

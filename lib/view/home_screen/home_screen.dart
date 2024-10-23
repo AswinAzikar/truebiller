@@ -13,11 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CustomDrawer(
-        backgroundColor: Colors.transparent,
-        gradientColor: buttonGradient,
-      ),
-      appBar: AppBar(),
+    
     );
   }
 }
