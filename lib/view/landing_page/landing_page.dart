@@ -5,6 +5,9 @@ import 'package:truebiller/Themes/app_text_theme.dart';
 import 'package:truebiller/constants/constants.dart';
 import 'package:truebiller/main.dart';
 import 'package:truebiller/utils/size_utils.dart';
+import 'package:truebiller/view/landing_page/widgets/additional_data_widget.dart';
+
+import '../../controllers/controllers.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -16,7 +19,7 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  final TextEditingController organizationController = TextEditingController();
+
   bool _orgNameEmpty = false;
   bool _isOrgNameSaved = false;
 
@@ -33,12 +36,12 @@ class _LandingPageState extends State<LandingPage>
   @override
   void dispose() {
     _controller.dispose();
-    organizationController.dispose();
+    organizationNameController.dispose();
     super.dispose();
   }
 
   void _validateInput() async {
-    if (organizationController.text.trim().isEmpty) {
+    if (organizationNameController.text.trim().isEmpty) {
       setState(() {
         _orgNameEmpty = true;
       });
@@ -46,9 +49,8 @@ class _LandingPageState extends State<LandingPage>
       setState(() {
         _orgNameEmpty = false;
       });
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('orgName', organizationController.text.trim());
-
+    
+      
       _isOrgNameSaved = true;
     }
   }
@@ -138,11 +140,9 @@ class _LandingPageState extends State<LandingPage>
                         ),
                       ],
                     ),
-                    width: 400,
+                    width: 600,
                     child: _isOrgNameSaved
-                        ? const Column(
-                            children: [],
-                          )
+                        ? const AdditionalDataWidget()
                         : Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -155,12 +155,12 @@ class _LandingPageState extends State<LandingPage>
                                 ),
                                 textAlign: TextAlign.center,
                               ),
-                              const SizedBox(height: 25),
+                              const SizedBox(height: paddingLarge),
                               TextFormField(
                                 onTap: () => setState(() {
                                   _orgNameEmpty = false;
                                 }),
-                                controller: organizationController,
+                                controller: organizationNameController,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Colors.grey[200],
