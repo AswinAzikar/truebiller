@@ -17,7 +17,8 @@ class _LandingPageState extends State<LandingPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   final TextEditingController organizationController = TextEditingController();
-  bool _orgEmpty = false;
+  bool _orgNameEmpty = false;
+  bool _isOrgNameSaved = false;
 
   @override
   void initState() {
@@ -32,24 +33,23 @@ class _LandingPageState extends State<LandingPage>
   @override
   void dispose() {
     _controller.dispose();
-    organizationController.dispose(); 
+    organizationController.dispose();
     super.dispose();
   }
 
   void _validateInput() async {
     if (organizationController.text.trim().isEmpty) {
       setState(() {
-        _orgEmpty = true;
+        _orgNameEmpty = true;
       });
     } else {
       setState(() {
-        _orgEmpty = false; 
+        _orgNameEmpty = false;
       });
-      SharedPreferences  prefs = await SharedPreferences.getInstance();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('orgName', organizationController.text.trim());
 
-    
-      
+      _isOrgNameSaved = true;
     }
   }
 
@@ -139,81 +139,86 @@ class _LandingPageState extends State<LandingPage>
                       ],
                     ),
                     width: 400,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          "Set Up Your Organization",
-                          style: context.openSansBold16.copyWith(
-                            color: Colors.black87,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 25),
-                        TextFormField(
-                          onTap: () => setState(() {
-                            _orgEmpty = false;
-                          }),
-                          controller: organizationController,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.grey[200],
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide.none,
-                            ),
-                            hintText: "Enter Organization Name",
-                            hintStyle: const TextStyle(color: Colors.black54),
-                            contentPadding: const EdgeInsets.symmetric(
-                                vertical: 18, horizontal: 16),
-                          ),
-                        ),
-                        const SizedBox(height: paddingLarge),
-                        if (_orgEmpty)
-                          Text(
-                            "Please enter the organization name",
-                            style: context.openSansBold16.copyWith(
-                                fontSize: 13,
-                                color: Colors.red,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        MouseRegion(
-                          cursor: SystemMouseCursors.click,
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeIn,
-                            width: double.infinity,
-                            height: 50.fSize,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: buttonGradient,
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
+                    child: _isOrgNameSaved
+                        ? const Column(
+                            children: [],
+                          )
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "Set Up Your Organization",
+                                style: context.openSansBold16.copyWith(
+                                  color: Colors.black87,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: shadows,
-                            ),
-                            child: ElevatedButton(
-                              onPressed: _validateInput,
-                              style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                backgroundColor: Colors.transparent,
-                                shadowColor: Colors.transparent,
-                              ),
-                              child: const Text(
-                                "Continue",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
+                              const SizedBox(height: 25),
+                              TextFormField(
+                                onTap: () => setState(() {
+                                  _orgNameEmpty = false;
+                                }),
+                                controller: organizationController,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.grey[200],
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  hintText: "Enter Organization Name",
+                                  hintStyle:
+                                      const TextStyle(color: Colors.black54),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 18, horizontal: 16),
                                 ),
                               ),
-                            ),
+                              const SizedBox(height: paddingLarge),
+                              if (_orgNameEmpty)
+                                Text(
+                                  "Please enter the organization name",
+                                  style: context.openSansBold16.copyWith(
+                                      fontSize: 13,
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: AnimatedContainer(
+                                  duration: const Duration(milliseconds: 200),
+                                  curve: Curves.easeIn,
+                                  width: double.infinity,
+                                  height: 35.fSize,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: buttonGradient,
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: shadows,
+                                  ),
+                                  child: ElevatedButton(
+                                    onPressed: _validateInput,
+                                    style: ElevatedButton.styleFrom(
+                                      elevation: 0,
+                                      backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
+                                    ),
+                                    child: const Text(
+                                      "Continue",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
                   ),
                 ),
               ],
