@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truebiller/Themes/app_text_theme.dart';
@@ -108,9 +109,10 @@ class _AdditionalDataWidgetState extends State<AdditionalDataWidget> {
             children: [
               Text(
                 "  Place:",
-                style: context.openSansRegular8.copyWith(color: Colors.grey),
+                style: context.openSansRegular8
+                    .copyWith(color: Colors.grey, fontSize: 9.fSize),
               ),
-              gap,
+              Gap(8.fSize),
               TextFormField(
                 controller: placeController,
                 decoration: InputDecoration(
@@ -139,9 +141,9 @@ class _AdditionalDataWidgetState extends State<AdditionalDataWidget> {
                         Text(
                           "  Zip:",
                           style: context.openSansRegular8
-                              .copyWith(color: Colors.grey),
+                              .copyWith(color: Colors.grey, fontSize: 9.fSize),
                         ),
-                        gap,
+                        Gap(8.fSize),
                         TextFormField(
                           controller: zipController,
                           decoration: InputDecoration(
@@ -169,9 +171,9 @@ class _AdditionalDataWidgetState extends State<AdditionalDataWidget> {
                         Text(
                           "  Phone:",
                           style: context.openSansRegular8
-                              .copyWith(color: Colors.grey),
+                              .copyWith(color: Colors.grey, fontSize: 9.fSize),
                         ),
-                        gap,
+                        Gap(8.fSize),
                         TextFormField(
                           controller: phoneController,
                           decoration: InputDecoration(
@@ -196,9 +198,10 @@ class _AdditionalDataWidgetState extends State<AdditionalDataWidget> {
               gapLarge,
               Text(
                 "  Email:",
-                style: context.openSansRegular8.copyWith(color: Colors.grey),
+                style: context.openSansRegular8
+                    .copyWith(color: Colors.grey, fontSize: 9.fSize),
               ),
-              gap,
+              Gap(8.fSize),
               TextFormField(
                 controller: emailController,
                 decoration: InputDecoration(
@@ -218,9 +221,10 @@ class _AdditionalDataWidgetState extends State<AdditionalDataWidget> {
               gapLarge,
               Text(
                 "  GST (Optional):",
-                style: context.openSansRegular8.copyWith(color: Colors.grey),
+                style: context.openSansRegular8
+                    .copyWith(color: Colors.grey, fontSize: 9.fSize),
               ),
-              gap,
+              Gap(8.fSize),
               TextFormField(
                 controller: gstController,
                 decoration: InputDecoration(
