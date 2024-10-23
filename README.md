@@ -1,8 +1,12 @@
 # truebiller
 
-A new Flutter project.
+A simple Billing application, simply using local storage 
 
 ## Getting Started
+
+
+
+https://github.com/AswinAzikar/truebiller/blob/main/screenshots/screenshot1.png
 
 This project is a starting point for a Flutter application.
 
