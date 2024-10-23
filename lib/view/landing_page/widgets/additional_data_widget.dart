@@ -89,6 +89,7 @@ class _AdditionalDataWidgetState extends State<AdditionalDataWidget> {
       _saveData();
       logger.i("All data are Saved");
     }
+    
   }
 
   void _handleKeyEvent(KeyEvent event) {

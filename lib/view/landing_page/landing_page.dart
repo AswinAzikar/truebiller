@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truebiller/Themes/app_text_theme.dart';
 import 'package:truebiller/constants/constants.dart';
@@ -10,6 +11,7 @@ import 'package:truebiller/view/landing_page/widgets/additional_data_widget.dart
 import 'package:truebiller/view/landing_page/widgets/buttons.dart';
 
 import '../../controllers/controllers.dart';
+import '../../routes/app_routes.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -47,6 +49,8 @@ class _LandingPageState extends State<LandingPage>
     if (event.logicalKey == LogicalKeyboardKey.enter) {
       _validateInput();
     }
+
+            Get.toNamed(AppRoutes.home);
   }
 
   void _validateInput() async {

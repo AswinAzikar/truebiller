@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truebiller/routes/app_routes.dart';
 import 'package:truebiller/utils/size_utils.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'view/landing_page/landing_page.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  bool isLoggedIn = prefs.getString("orgName") != null;
+
+  runApp(MyApp(isLoggedIn: isLoggedIn));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLoggedIn;
+
+  const MyApp({super.key, required this.isLoggedIn});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +30,18 @@ class MyApp extends StatelessWidget {
           },
         );
       },
-      routes: AppRoutes.routes,
-      initialRoute: AppRoutes.landingScreen,
+      initialRoute: isLoggedIn ? AppRoutes.home : AppRoutes.landingScreen,
+      onGenerateRoute: (RouteSettings settings) {
+        final WidgetBuilder? builder = AppRoutes.routes[settings.name];
+        if (builder != null) {
+          return MaterialPageRoute(
+            builder: (context) => builder(context),
+            settings: settings,
+          );
+        }
+
+        return MaterialPageRoute(builder: (context) => const LandingPage());
+      },
     );
   }
 }
