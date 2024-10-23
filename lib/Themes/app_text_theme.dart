@@ -5,7 +5,7 @@ class AppTextStyles {
   static String openSansFontFamily = "OpenSans";
   static String interFontFamily = "Inter";
 
-  // Open Sans Text Styles
+  
   static TextStyle openSansRegular14 = TextStyle(
       fontFamily: openSansFontFamily,
       fontWeight: FontWeight.w400,
@@ -32,7 +32,7 @@ class AppTextStyles {
       fontWeight: FontWeight.w600,
       fontSize: 24.fSize);
 
-  // Inter Text Styles
+  
   static TextStyle interRegular14 = TextStyle(
       fontFamily: interFontFamily,
       fontWeight: FontWeight.w400,
@@ -59,23 +59,23 @@ class AppTextStyles {
       fontWeight: FontWeight.w600,
       fontSize: 24.fSize);
 
-  // Add more styles as needed
+  
 }
 
 extension TextStyleExtensions on BuildContext {
-  // Open Sans Extensions
+  
   TextStyle get openSansRegular14 => AppTextStyles.openSansRegular14;
   TextStyle get openSansBold16 => AppTextStyles.openSansBold16;
   TextStyle get openSansBoldItalic16 => AppTextStyles.openSansBoldItalic16;
   TextStyle get openSansMedium18 => AppTextStyles.openSansMedium18;
   TextStyle get openSansSemiBold24 => AppTextStyles.openSansSemiBold24;
 
-  // Inter Extensions
+  
   TextStyle get interRegular14 => AppTextStyles.interRegular14;
   TextStyle get interBold16 => AppTextStyles.interBold16;
   TextStyle get interBoldItalic16 => AppTextStyles.interBoldItalic16;
   TextStyle get interMedium18 => AppTextStyles.interMedium18;
   TextStyle get interSemiBold24 => AppTextStyles.interSemiBold24;
 
-  // Add more extensions as needed
+  
 }

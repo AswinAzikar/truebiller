@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 
 const double padding = 8;
 const double paddingLarge = 16;
@@ -23,3 +24,15 @@ const gapTiny = Gap(paddingTiny);
 Color textColor = const Color(0xffB6B6B6);
 
 Color buttonGreen = const Color(0xff37AD54);
+
+List<Color> buttonGradient = [const Color(0xFF6FA8DC), const Color(0xFF3A79B7)];
+
+List<BoxShadow> shadows = [
+  BoxShadow(
+    color: Colors.black.withOpacity(0.1),
+    blurRadius: 15,
+    offset: const Offset(0, 5),
+  ),
+];
+
+Logger logger = Logger();

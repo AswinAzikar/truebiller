@@ -1,6 +1,10 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truebiller/Themes/app_text_theme.dart';
+import 'package:truebiller/constants/constants.dart';
+import 'package:truebiller/main.dart';
+import 'package:truebiller/utils/size_utils.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -12,6 +16,8 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  final TextEditingController organizationController = TextEditingController();
+  bool _orgEmpty = false;
 
   @override
   void initState() {
@@ -26,7 +32,25 @@ class _LandingPageState extends State<LandingPage>
   @override
   void dispose() {
     _controller.dispose();
+    organizationController.dispose(); 
     super.dispose();
+  }
+
+  void _validateInput() async {
+    if (organizationController.text.trim().isEmpty) {
+      setState(() {
+        _orgEmpty = true;
+      });
+    } else {
+      setState(() {
+        _orgEmpty = false; 
+      });
+      SharedPreferences  prefs = await SharedPreferences.getInstance();
+      await prefs.setString('orgName', organizationController.text.trim());
+
+    
+      
+    }
   }
 
   @override
@@ -89,9 +113,7 @@ class _LandingPageState extends State<LandingPage>
             flex: 1,
             child: Stack(
               children: [
-                Container(
-                  color: Colors.white,
-                ),
+                Container(color: Colors.white),
                 _buildMovingBubble(
                     top: 200,
                     right: 50,
@@ -130,7 +152,11 @@ class _LandingPageState extends State<LandingPage>
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 25),
-                        TextField(
+                        TextFormField(
+                          onTap: () => setState(() {
+                            _orgEmpty = false;
+                          }),
+                          controller: organizationController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.grey[200],
@@ -141,41 +167,41 @@ class _LandingPageState extends State<LandingPage>
                             hintText: "Enter Organization Name",
                             hintStyle: const TextStyle(color: Colors.black54),
                             contentPadding: const EdgeInsets.symmetric(
-                              vertical: 18,
-                              horizontal: 16,
-                            ),
+                                vertical: 18, horizontal: 16),
                           ),
                         ),
-                        const SizedBox(height: 25),
+                        const SizedBox(height: paddingLarge),
+                        if (_orgEmpty)
+                          Text(
+                            "Please enter the organization name",
+                            style: context.openSansBold16.copyWith(
+                                fontSize: 13,
+                                color: Colors.red,
+                                fontWeight: FontWeight.w500),
+                          ),
                         MouseRegion(
                           cursor: SystemMouseCursors.click,
                           child: AnimatedContainer(
                             duration: const Duration(milliseconds: 200),
                             curve: Curves.easeIn,
                             width: double.infinity,
-                            height: 50,
+                            height: 50.fSize,
                             decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                colors: [Color(0xFF6FA8DC), Color(0xFF3A79B7)],
+                              gradient: LinearGradient(
+                                colors: buttonGradient,
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                               ),
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 15,
-                                  offset: const Offset(0, 5),
-                                ),
-                              ],
+                              boxShadow: shadows,
                             ),
                             child: ElevatedButton(
+                              onPressed: _validateInput,
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
                                 backgroundColor: Colors.transparent,
                                 shadowColor: Colors.transparent,
                               ),
-                              onPressed: () {},
                               child: const Text(
                                 "Continue",
                                 style: TextStyle(
@@ -198,13 +224,14 @@ class _LandingPageState extends State<LandingPage>
     );
   }
 
-  Widget _buildMovingBubble(
-      {double? top,
-      double? bottom,
-      double? left,
-      double? right,
-      required double size,
-      required Color color}) {
+  Widget _buildMovingBubble({
+    double? top,
+    double? bottom,
+    double? left,
+    double? right,
+    required double size,
+    required Color color,
+  }) {
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
