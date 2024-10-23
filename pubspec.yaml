@@ -1,41 +1,17 @@
 name: truebiller
 description: "A new Flutter project."
 
-
 publish_to: 'none' 
-
-
-
-
-
-
-
-
-
-
-
-
 
 version: 1.0.0+1
 
 environment:
   sdk: ^3.5.3
 
-
-
-
-
-
-
 dependencies:
   flutter:
     sdk: flutter
-
-
-  
-  
   cupertino_icons: ^1.0.8
-  
   flutter_gen: ^5.8.0
   build_runner: ^2.4.13
   flutter_svg: ^2.0.10+1
@@ -48,52 +24,60 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  
-  
-  
-  
-  
   flutter_lints: ^4.0.0
 
-
-
-
-
 flutter:
-
-  
-  
-  
   uses-material-design: true
 
-  
-  
-  
-  
+  # Add your font assets here
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Bold.ttf
+        - asset: assets/fonts/OpenSans-BoldItalic.ttf
+        - asset: assets/fonts/OpenSans-Italic.ttf
+        - asset: assets/fonts/OpenSans-Light.ttf
+        - asset: assets/fonts/OpenSans-LightItalic.ttf
+        - asset: assets/fonts/OpenSans-Medium.ttf
+        - asset: assets/fonts/OpenSans-MediumItalic.ttf
+        - asset: assets/fonts/OpenSans-SemiBold.ttf
+        - asset: assets/fonts/OpenSans-SemiBoldItalic.ttf
+        - asset: assets/fonts/OpenSans-ExtraBold.ttf
+        - asset: assets/fonts/OpenSans-ExtraBoldItalic.ttf
+        
+        # Condensed styles
+        - asset: assets/fonts/OpenSans_Condensed-Regular.ttf
+        - asset: assets/fonts/OpenSans_Condensed-Bold.ttf
+        - asset: assets/fonts/OpenSans_Condensed-Italic.ttf
+        - asset: assets/fonts/OpenSans_Condensed-BoldItalic.ttf
+        - asset: assets/fonts/OpenSans_Condensed-Light.ttf
+        - asset: assets/fonts/OpenSans_Condensed-LightItalic.ttf
+        - asset: assets/fonts/OpenSans_Condensed-Medium.ttf
+        - asset: assets/fonts/OpenSans_Condensed-MediumItalic.ttf
+        - asset: assets/fonts/OpenSans_Condensed-SemiBold.ttf
+        - asset: assets/fonts/OpenSans_Condensed-SemiBoldItalic.ttf
+        - asset: assets/fonts/OpenSans_Condensed-ExtraBold.ttf
+        - asset: assets/fonts/OpenSans_Condensed-ExtraBoldItalic.ttf
+        
+        # Semi Condensed styles
+        - asset: assets/fonts/OpenSans_SemiCondensed-Regular.ttf
+        - asset: assets/fonts/OpenSans_SemiCondensed-Bold.ttf
+        - asset: assets/fonts/OpenSans_SemiCondensed-Italic.ttf
+        - asset: assets/fonts/OpenSans_SemiCondensed-BoldItalic.ttf
+        - asset: assets/fonts/OpenSans_SemiCondensed-Light.ttf
+        - asset: assets/fonts/OpenSans_SemiCondensed-LightItalic.ttf
+        - asset: assets/fonts/OpenSans_SemiCondensed-Medium.ttf
+        - asset: assets/fonts/OpenSans_SemiCondensed-MediumItalic.ttf
+        - asset: assets/fonts/OpenSans_SemiCondensed-SemiBold.ttf
+        - asset: assets/fonts/OpenSans_SemiCondensed-SemiBoldItalic.ttf
+        
+        # Variable fonts (if needed)
+        - asset: assets/fonts/OpenSans-VariableFont_wdth,wght.ttf 
+        - asset: assets/fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf 
 
-  
-  
+  # Add your image and other assets here
+  # assets:
+  #   - assets/images/   # Include all images in this directory
+  #   - assets/icons/    # Include all icons in this directory
 
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
