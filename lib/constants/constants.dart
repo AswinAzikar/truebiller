@@ -23,7 +23,6 @@ const gapTiny = Gap(paddingTiny);
 // ]);
 Color textColor = const Color(0xffB6B6B6);
 
-Color buttonGreen = const Color(0xff37AD54);
 
 List<Color> buttonGradient = [const Color(0xFF6FA8DC), const Color(0xFF3A79B7)];
 
