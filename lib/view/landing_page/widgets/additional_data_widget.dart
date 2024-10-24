@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:gap/gap.dart';
+<<<<<<< HEAD
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truebiller/Themes/app_text_theme.dart';
+=======
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:truebiller/Themes/app_text_theme.dart';
+import 'package:truebiller/routes/app_routes.dart';
+>>>>>>> master
 import 'package:truebiller/utils/size_utils.dart';
 import 'package:truebiller/view/landing_page/widgets/buttons.dart';
 
@@ -71,6 +78,10 @@ class _AdditionalDataWidgetState extends State<AdditionalDataWidget> {
   }
 
   Future<void> _saveData() async {
+<<<<<<< HEAD
+=======
+    logger.e("data saving started");
+>>>>>>> master
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('orgName', organizationNameController.text.trim());
     prefs.setString('orgPlace', placeController.text.trim());
@@ -89,17 +100,26 @@ class _AdditionalDataWidgetState extends State<AdditionalDataWidget> {
       _saveData();
       logger.i("All data are Saved");
     }
+<<<<<<< HEAD
     
   }
 
   void _handleKeyEvent(KeyEvent event) {
     if (event.logicalKey == LogicalKeyboardKey.enter) {
+=======
+    Get.toNamed(AppRoutes.navigation);
+  }
+
+  void _handleKeyEvent(KeyEvent event) {
+    if (event.logicalKey == LogicalKeyboardKey.enter && event is KeyDownEvent) {
+>>>>>>> master
       _validateAndSave();
     }
   }
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return KeyboardListener(
       focusNode: _focusNode,
       onKeyEvent: (value) {
@@ -118,6 +138,26 @@ class _AdditionalDataWidgetState extends State<AdditionalDataWidget> {
           ),
           const SizedBox(height: paddingLarge),
           Form(
+=======
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          "Set Up Your Organization",
+          style: context.openSansBold16
+              .copyWith(color: Colors.black87, fontSize: 16),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: paddingLarge),
+        KeyboardListener(
+          focusNode: _focusNode,
+          onKeyEvent: (value) {
+            _handleKeyEvent(value);
+          },
+          child: Form(
+>>>>>>> master
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -260,6 +300,7 @@ class _AdditionalDataWidgetState extends State<AdditionalDataWidget> {
               ],
             ),
           ),
+<<<<<<< HEAD
           const SizedBox(height: paddingLarge),
 
           LoadButton(onTap: _validateAndSave)
@@ -298,6 +339,46 @@ class _AdditionalDataWidgetState extends State<AdditionalDataWidget> {
           // ),
         ],
       ),
+=======
+        ),
+        const SizedBox(height: paddingLarge),
+
+        LoadButton(onTap: _validateAndSave)
+        // MouseRegion(
+        //   cursor: SystemMouseCursors.click,
+        //   child: AnimatedContainer(
+        //     duration: const Duration(milliseconds: 200),
+        //     curve: Curves.easeIn,
+        //     width: double.infinity,
+        //     height: 35.fSize,
+        //     decoration: BoxDecoration(
+        //       gradient: LinearGradient(
+        //         colors: buttonGradient,
+        //         begin: Alignment.topLeft,
+        //         end: Alignment.bottomRight,
+        //       ),
+        //       borderRadius: BorderRadius.circular(10),
+        //       boxShadow: shadows,
+        //     ),
+        //     child: ElevatedButton(
+        //       onPressed: _validateAndSave,
+        //       style: ElevatedButton.styleFrom(
+        //         elevation: 0,
+        //         backgroundColor: Colors.transparent,
+        //         shadowColor: Colors.transparent,
+        //       ),
+        //       child: const Text(
+        //         "Continue",
+        //         style: TextStyle(
+        //           fontSize: 18,
+        //           color: Colors.white,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
+      ],
+>>>>>>> master
     );
   }
 }

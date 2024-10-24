@@ -46,11 +46,19 @@ class _LandingPageState extends State<LandingPage>
   }
 
   void _handleKeyEvent(KeyEvent event) {
+<<<<<<< HEAD
     if (event.logicalKey == LogicalKeyboardKey.enter) {
       _validateInput();
     }
 
             Get.toNamed(AppRoutes.home);
+=======
+    if (event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.enter) {
+      _validateInput();
+    }
+
+    // Get.toNamed(AppRoutes.home);
+>>>>>>> master
   }
 
   void _validateInput() async {
@@ -70,6 +78,7 @@ class _LandingPageState extends State<LandingPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
       body: KeyboardListener(
         focusNode: _focusNode,
         onKeyEvent: (value) {
@@ -174,6 +183,112 @@ class _LandingPageState extends State<LandingPage>
                                 ),
                                 const SizedBox(height: paddingLarge),
                                 TextFormField(
+=======
+      body: Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Stack(
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFF5CA4DF), Color(0xFF3461C1)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                  ),
+                ),
+                _buildMovingBubble(
+                    top: 100,
+                    left: 40,
+                    size: 120,
+                    color: Colors.white.withOpacity(0.2)),
+                _buildMovingBubble(
+                    bottom: 150,
+                    left: 150,
+                    size: 80,
+                    color: Colors.white.withOpacity(0.15)),
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.receipt_long_rounded,
+                        size: 120,
+                        color: Colors.white.withOpacity(0.9),
+                      ),
+                      const SizedBox(height: 20),
+                      AnimatedTextKit(
+                        animatedTexts: [
+                          TypewriterAnimatedText(
+                            "Welcome to TrueBiller",
+                            textStyle: context.openSansSemiBold24.copyWith(
+                              color: Colors.white,
+                            ),
+                            speed: const Duration(milliseconds: 200),
+                          ),
+                        ],
+                        totalRepeatCount: 1,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Stack(
+              children: [
+                Container(color: Colors.white),
+                _buildMovingBubble(
+                    top: 200,
+                    right: 50,
+                    size: 100,
+                    color: Colors.blue.withOpacity(0.1)),
+                _buildMovingBubble(
+                    bottom: 100,
+                    right: 100,
+                    size: 60,
+                    color: Colors.blue.withOpacity(0.15)),
+                Center(
+                  child: Container(
+                    padding: const EdgeInsets.all(30.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 15,
+                          offset: const Offset(0, 10),
+                        ),
+                      ],
+                    ),
+                    width: 300.fSize,
+                    child: _isOrgNameSaved
+                        ? const AdditionalDataWidget()
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "Set Up Your Organization",
+                                style: context.openSansBold16.copyWith(
+                                  color: Colors.black87,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: paddingLarge),
+                              KeyboardListener(
+                                focusNode: _focusNode,
+                                onKeyEvent: (value) {
+                                  _handleKeyEvent(value);
+                                },
+                                child: TextFormField(
+>>>>>>> master
                                   onTap: () => setState(() {
                                     _orgNameEmpty = false;
                                   }),
@@ -193,6 +308,7 @@ class _LandingPageState extends State<LandingPage>
                                         vertical: 18, horizontal: 16),
                                   ),
                                 ),
+<<<<<<< HEAD
                                 const SizedBox(height: paddingLarge),
                                 if (_orgNameEmpty)
                                   Text(
@@ -212,6 +328,27 @@ class _LandingPageState extends State<LandingPage>
             ),
           ],
         ),
+=======
+                              ),
+                              const SizedBox(height: paddingLarge),
+                              if (_orgNameEmpty)
+                                Text(
+                                  "Please enter the organization name",
+                                  style: context.openSansBold16.copyWith(
+                                      fontSize: 13,
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              LoadButton(onTap: _validateInput)
+                            ],
+                          ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+>>>>>>> master
       ),
     );
   }
