@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:truebiller/Themes/app_text_theme.dart';
 import 'package:truebiller/constants/constants.dart';
 import 'package:truebiller/utils/size_utils.dart';
@@ -19,8 +20,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   @override
   void initState() {
-    title = "Dashboard"; // Default to Dashboard for the billing system
-    super.initState();
+    title = "Dashboard";
   }
 
   @override
@@ -36,15 +36,15 @@ class _NavigationScreenState extends State<NavigationScreen> {
             child: Text(
               title,
               style: TextStyle(
-                  fontSize: 18.fSize,
-                  fontWeight: FontWeight.w700,
-                  color: const Color.fromARGB(
-                      255, 27, 116, 189)), // White text for contrast
+                fontSize: 18.fSize,
+                fontWeight: FontWeight.w700,
+                color: const Color.fromARGB(255, 27, 116, 189),
+              ),
             ),
           ),
         ),
         key: _sliderDrawerKey,
-        sliderOpenSize: 200.fSize, // Slightly wider for desktop feel
+        sliderOpenSize: 200.fSize,
         slider: _SliderView(
           onItemClick: (title) {
             _sliderDrawerKey.currentState!.closeSlider();
@@ -53,16 +53,36 @@ class _NavigationScreenState extends State<NavigationScreen> {
             });
           },
         ),
-        child: _ContentArea(title: title), // Shows content based on selection
+        child: _ContentArea(title: title),
       ),
     );
   }
 }
 
-class _SliderView extends StatelessWidget {
+class _SliderView extends StatefulWidget {
   final Function(String)? onItemClick;
 
   const _SliderView({super.key, this.onItemClick});
+
+  @override
+  State<_SliderView> createState() => _SliderViewState();
+}
+
+class _SliderViewState extends State<_SliderView> {
+  String _storeName = '';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _storeName = prefs.getString('orgName') ?? '';
+    logger.d(_storeName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,15 +104,17 @@ class _SliderView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 15),
-          const Text(
-            'Admin', // Use a more formal term for a billing system admin
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
-            ),
-          ),
+          Builder(builder: (context) {
+            return Text(
+              _storeName,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
+            );
+          }),
           const SizedBox(height: 20),
           ...[
             Menu(Icons.dashboard, 'Dashboard'),
@@ -101,8 +123,12 @@ class _SliderView extends StatelessWidget {
             Menu(Icons.analytics, 'Reports'),
             Menu(Icons.settings, 'Settings'),
             Menu(Icons.logout, 'Log Out'),
-          ].map((menu) => _SliderMenuItem(
-              title: menu.title, iconData: menu.iconData, onTap: onItemClick)),
+          ].map(
+            (menu) => _SliderMenuItem(
+                title: menu.title,
+                iconData: menu.iconData,
+                onTap: widget.onItemClick),
+          ),
         ],
       ),
     );
@@ -133,7 +159,7 @@ class _SliderMenuItem extends StatelessWidget {
       title: Text(
         title,
         style: const TextStyle(
-          color: Colors.white, // White text for dark background
+          color: Colors.white,
           fontSize: 18,
         ),
       ),
@@ -151,21 +177,14 @@ class _ContentArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white, // Light background for content area
+      color: Colors.white,
       padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Text(
-          //   title,
-          //   style: const TextStyle(
-          //     fontSize: 28,
-          //     fontWeight: FontWeight.bold,
-          //   ),
-          // ),
           const SizedBox(height: 20),
           Expanded(
-            child: _buildContent(title), // Content changes dynamically
+            child: _buildContent(title),
           ),
         ],
       ),
